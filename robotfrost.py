@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import argparse
 from torch import load, save
 from train import train
@@ -7,10 +8,11 @@ from dataset import GutenbergDataset
 
 # Define args
 parser = argparse.ArgumentParser()
-parser.add_argument('--epochs', type=int, default=100)
-parser.add_argument('--batch-size', type=int, default=256)
-parser.add_argument('--sequence-length', type=int, default=16)
-parser.add_argument('--predict', type=str, default='')
+parser.add_argument('--epochs', type=int, default=20)
+parser.add_argument('--batch-size', type=int, default=128)
+parser.add_argument('--sequence-length', type=int, default=6)
+parser.add_argument('--starting-text', type=str, default='')
+parser.add_argument('--generate', type=bool, default=False)
 parser.add_argument('--cuda', type=bool, default=False)
 args = parser.parse_args()
 
@@ -25,8 +27,8 @@ except Exception as e:
     print('exception,', e, '... using new model')
 
 # Predict
-if args.predict != '':
-    print(' '.join(predict(model, dataset, args.predict)))
+if args.generate:
+    print(' '.join(predict(model, dataset, args.starting_text)))
     exit(0)
 
 # Train

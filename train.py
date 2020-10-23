@@ -11,7 +11,7 @@ def train(model, dataset, epochs, bs, seq_len, cuda):
     # Initialize necessary classes
     dataloader = DataLoader(dataset, batch_size=bs)
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.SGD(model.parameters(), lr=0.1, momentum=0.9)
+    optimizer = optim.Adam(model.parameters())
 
     # Iterate for num epochs
     for epoch in range(epochs):

@@ -1,9 +1,14 @@
 import numpy as np
+from random import randint
 from torch import tensor
 from torch.nn.functional import softmax
 
 def predict(model, dataset, starter_text, next_words=100):
     """Function to generate output base on a starter_text using the forward pass."""
+
+    # Get starting text
+    if starter_text == '':
+        starter_text = dataset.index_to_word[randint(0, len(dataset.uniq_words))]
 
     # Set model to evaluation mode 
     model.eval()
