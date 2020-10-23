@@ -1,0 +1,3 @@
+__pycache__/
+gutenberg_data/
+*.pth
