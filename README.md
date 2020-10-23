@@ -14,9 +14,9 @@ pip3 install -r requirements.txt
 
 Note that before you generate anything, you'll need a trained model.
 
-If try to generate a poem with a `./state.dict.pth` file a new one will be made with random values, but this is not ideal.
+If you try to generate a poem without a `./state.dict.pth` file, a new one will be made with random values, but this is not ideal.
 
-You can download a trained model from the releases page or see the next section for training your own.
+You can download a trained model from the releases page, or see the next section for training your own.
 
 Run the following command:
 
@@ -24,9 +24,9 @@ Run the following command:
 python3 robotfrost.py --generate True
 ```
 
-You can set a poem length with `--poem-length <int>`, and some starting words to use with `--starting-words <str>`.
-
 You should see an A.I. generated poem!
+
+You can set a poem length with `--poem-length <int>`, and some starting words to use with `--starting-words <str>`.
 
 #### Training the model
 
