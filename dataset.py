@@ -37,7 +37,10 @@ class GutenbergDataset(Dataset):
         text = ' '
         for id_nr in id_list:
             text += strip_headers(load_etext(id_nr)).strip()
-        return [i for i in text.replace('\t', '').replace('\n', '').split(' ') if i != '']
+        for i in '123456890[]()"”\t\n':
+            text = text.replace(i, '')
+        text = text.replace('--', '')
+        return [i for i in text.split(' ') if i != '']
 
     def get_uniq_words(self):
         """Returns a sorted array of the unique words in the dataset."""

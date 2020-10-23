@@ -4,7 +4,7 @@ from torch import tensor
 from torch.nn.functional import softmax
 
 def predict(model, dataset, starter_text, next_words=100):
-    """Function to generate output base on a starter_text using the forward pass."""
+    """Generate output base on a starter_text using the forward pass."""
 
     # Get starting text
     if starter_text == '':
@@ -31,3 +31,28 @@ def predict(model, dataset, starter_text, next_words=100):
         words.append(dataset.index_to_word[word_index])
 
     return words
+
+def poem(model, dataset, starter_text, next_words=100):
+    """Wrapper to predict, formats output."""
+
+    # Call predict
+    text = predict(model, dataset, starter_text, next_words)
+
+    for i in range(len(text)):
+        if text[i].isupper():
+            text[i] = text[i].lower()
+            
+    text = ' '.join(text)
+
+    # Remove bad quotes and parens
+    if text.count('(') != text.count(')'):
+        text = text.replace('(', '')
+        text = text.replace(')', '')
+    if text.count('"') % 2 != 0:
+        text = text.replace('"', '')
+    
+    output = [i for i in text.split('.') if i != '']
+    output = [output[i][0].upper() + output[i][1:] for i in range(len(output))]
+    output = [output[i][1:] for i in range(len(output)) if output[i][0] == ' ']
+
+    return '\n'.join(output)

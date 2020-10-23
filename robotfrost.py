@@ -50,7 +50,7 @@ args = parser.parse_args()
 # Import here so not to have a delay for --help
 from torch import load, save
 from train import train
-from poem import predict
+from poem import poem
 from model import RobotFrost
 from dataset import GutenbergDataset
 
@@ -66,7 +66,7 @@ except Exception as e:
 
 # Predict
 if args.generate:
-    print(' '.join(predict(model, dataset, args.starting_text)))
+    print(poem(model, dataset, args.starting_text))
     exit(0)
 
 # Train
