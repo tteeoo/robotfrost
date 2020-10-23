@@ -40,7 +40,7 @@ def poem(model, dataset, starter_text, next_words):
 
     # Lower all-caps words
     for i in range(len(text)):
-        if text[i].isupper():
+        if text[i].isupper() and (len(text[i]) != 1):
             text[i] = text[i].lower()
             
     text = ' '.join(text)
@@ -53,9 +53,9 @@ def poem(model, dataset, starter_text, next_words):
         text = text.replace('"', '')
 
     # Separate sentences
-    text = text.replace('.', '%%%%%%%%%%%').replace(';', '%%%%%%%%%%%').replace('_', '')
+    text = text.replace('.', '%%%%%%%%%%%').replace(';', '%%%%%%%%%%%').replace('_', '').replace(' i ', ' I ')
     output = [i for i in text.split('%%%%%%%%%%%') if i != '']
-    output = [output[i][1:] for i in range(len(output)) if output[i][0] == ' ']
+    output = [output[i][1:] if output[i][0] == ' ' else output[i] for i in range(len(output))]
     output = [output[i][0].upper() + output[i][1:] for i in range(len(output))]
 
     for i in range(len(output)):
