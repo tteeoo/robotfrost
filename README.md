@@ -49,29 +49,13 @@ python3 robotfrost.py --help
 ## Some poems by Robot Frost
 
 ```
-Turns underscores
-Mood
-Come
-Doctor? to laughed
-Paradise-in-bloom, dream
-Or every young house and house in all those frozen
-It ought to know his how to keep well up
-Being you might have name to bear a thing
-That he was too long at the time for which I have to say,
-You take a say
-But in rain I should speak of it
-Samoa,
-Russia,
-Ireland I complain and see for you,
-Folks their
-```
-```
 Lifelike path
 Waiting
 Steps is there? roads diverged in a figure in the shelves of all her at such a time?
 It rests with the form
 Of being anything
 ```
+
 ```
 A flower bride, raspberries grow
 Horse went outer must end kind, off light
@@ -82,6 +66,21 @@ May this a thing so very more best off a good one,
 How they no one
 To see the way he asked a thing like
 Paul or be the thing so
+```
+
+```
+Behind, man’s
+Moor
+Until I looked at the ceiling,
+The fire dark all is he's all the town to the ground,
+Of their name
+He won't ask him in the wind
+I was not to say, for ask life who we set our two so much
+As one but left to our taking
+Too though he said,
+And turn the name out of reach? him on me
+He made the money
+The least he was
 ```
 
 ## License
