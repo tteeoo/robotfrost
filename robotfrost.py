@@ -1,20 +1,58 @@
 #!/usr/bin/env python3
 import argparse
+
+# Define args
+parser = argparse.ArgumentParser()
+parser.add_argument(
+    '-e',
+    '--epochs',
+    type = int,
+    help = 'the number of epochs to go through when training',
+    default = 20
+)
+parser.add_argument(
+    '-b',
+    '--batch-size',
+    type = int,
+    help = 'the batch size to be used when training',
+    default = 128
+)
+parser.add_argument(
+    '-s',
+    '--sequence-length',
+    type = int,
+    help = 'the sequence length to be used when training',
+    default = 16
+)
+parser.add_argument(
+    '-c',
+    '--cuda',
+    type = bool,
+    help = 'wether or not to use the gpu when training',
+    default = False
+)
+parser.add_argument(
+    '-g',
+    '--generate',
+    type = bool,
+    help = 'set to True to generate a poem instead of train',
+    default = False
+)
+parser.add_argument(
+    '-t',
+    '--starting-text',
+    help = 'the starting text to be used when generating',
+    type = str,
+    default = ''
+)
+args = parser.parse_args()
+
+# Import here so not to have a delay for --help
 from torch import load, save
 from train import train
 from poem import predict
 from model import RobotFrost
 from dataset import GutenbergDataset
-
-# Define args
-parser = argparse.ArgumentParser()
-parser.add_argument('--epochs', type=int, default=20)
-parser.add_argument('--batch-size', type=int, default=128)
-parser.add_argument('--sequence-length', type=int, default=6)
-parser.add_argument('--starting-text', type=str, default='')
-parser.add_argument('--generate', type=bool, default=False)
-parser.add_argument('--cuda', type=bool, default=False)
-args = parser.parse_args()
 
 # Instantiate model and dataset
 dataset = GutenbergDataset(args.sequence_length)
