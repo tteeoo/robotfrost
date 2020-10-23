@@ -55,7 +55,7 @@ parser.add_argument(
 args = parser.parse_args()
 
 # Import here so not to have a delay for --help
-from torch import load, save
+from torch import load, save, device
 from train import train
 from poem import poem
 from model import RobotFrost
@@ -67,7 +67,7 @@ model = RobotFrost(dataset)
 
 # Try to load model
 try:
-    model.load_state_dict(load('./state.dict.pth'))
+    model.load_state_dict(load('./state.dict.pth', map_location=device('cpu')))
 except Exception as e:
     print('exception,', e, '... using new model')
 

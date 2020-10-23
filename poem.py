@@ -38,6 +38,7 @@ def poem(model, dataset, starter_text, next_words):
     # Call predict
     text = predict(model, dataset, starter_text, next_words)
 
+    # Lower all-caps words
     for i in range(len(text)):
         if text[i].isupper():
             text[i] = text[i].lower()
@@ -50,10 +51,20 @@ def poem(model, dataset, starter_text, next_words):
         text = text.replace(')', '')
     if text.count('"') % 2 != 0:
         text = text.replace('"', '')
-    text = text.replace('.', '%%%%%%%%%%%').replace(';', '%%%%%%%%%%%')
-    
+
+    # Separate sentences
+    text = text.replace('.', '%%%%%%%%%%%').replace(';', '%%%%%%%%%%%').replace('_', '')
     output = [i for i in text.split('%%%%%%%%%%%') if i != '']
     output = [output[i][1:] for i in range(len(output)) if output[i][0] == ' ']
     output = [output[i][0].upper() + output[i][1:] for i in range(len(output))]
+
+    for i in range(len(output)):
+        for j in range(len(output[i])):
+            if j == 0:
+                continue
+            if output[i][j].isupper() and (output[i][j-1] == ' '):
+                a = list(output[i])
+                a.insert(j, '\n')
+                output[i] = ''.join(a)
 
     return '\n'.join(output)
