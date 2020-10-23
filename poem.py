@@ -3,22 +3,22 @@ from random import randint
 from torch import tensor
 from torch.nn.functional import softmax
 
-def predict(model, dataset, starter_text, next_words=100):
+def predict(model, dataset, starter_text, next_words):
     """Generate output base on a starter_text using the forward pass."""
+
+    # Set model to evaluation mode 
+    model.eval()
 
     # Get starting text
     if starter_text == '':
         starter_text = dataset.index_to_word[randint(0, len(dataset.uniq_words))]
-
-    # Set model to evaluation mode 
-    model.eval()
 
     # Initialize state
     words = starter_text.split(' ')
     state_h, state_c = model.init_state(len(words))
 
     # Iterate for amount of words to generate
-    for i in range(0, next_words):
+    for i in range(0, next_words - len(words)):
 
         # Run forward pass
         x = tensor([[dataset.word_to_index[w] for w in words[i:]]])
@@ -32,7 +32,7 @@ def predict(model, dataset, starter_text, next_words=100):
 
     return words
 
-def poem(model, dataset, starter_text, next_words=100):
+def poem(model, dataset, starter_text, next_words):
     """Wrapper to predict, formats output."""
 
     # Call predict
@@ -50,8 +50,9 @@ def poem(model, dataset, starter_text, next_words=100):
         text = text.replace(')', '')
     if text.count('"') % 2 != 0:
         text = text.replace('"', '')
+    text = text.replace('.', '%%%%%%%%%%%').replace(';', '%%%%%%%%%%%')
     
-    output = [i for i in text.split('.').split(';') if i != '']
+    output = [i for i in text.split('%%%%%%%%%%%') if i != '']
     output = [output[i][1:] for i in range(len(output)) if output[i][0] == ' ']
     output = [output[i][0].upper() + output[i][1:] for i in range(len(output))]
 

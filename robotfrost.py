@@ -45,6 +45,13 @@ parser.add_argument(
     type = str,
     default = ''
 )
+parser.add_argument(
+    '-l',
+    '--poem-length',
+    help = 'the length of the poem to generate (in words)',
+    type = int,
+    default = 75
+)
 args = parser.parse_args()
 
 # Import here so not to have a delay for --help
@@ -66,7 +73,7 @@ except Exception as e:
 
 # Predict
 if args.generate:
-    print(poem(model, dataset, args.starting_text))
+    print(poem(model, dataset, args.starting_text, args.poem_length))
     exit(0)
 
 # Train
