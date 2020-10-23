@@ -63,6 +63,8 @@ def poem(model, dataset, starter_text, next_words):
             if j == 0:
                 continue
             if output[i][j].isupper() and (output[i][j-1] == ' '):
+                if (j + 1 != len(output[i])) and (output[i][j] == 'I') and (output[i][j+1] == ' '):
+                    continue
                 a = list(output[i])
                 a.insert(j, '\n')
                 output[i] = ''.join(a)
