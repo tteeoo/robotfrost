@@ -51,8 +51,8 @@ def poem(model, dataset, starter_text, next_words=100):
     if text.count('"') % 2 != 0:
         text = text.replace('"', '')
     
-    output = [i for i in text.split('.') if i != '']
-    output = [output[i][0].upper() + output[i][1:] for i in range(len(output))]
+    output = [i for i in text.split('.').split(';') if i != '']
     output = [output[i][1:] for i in range(len(output)) if output[i][0] == ' ']
+    output = [output[i][0].upper() + output[i][1:] for i in range(len(output))]
 
     return '\n'.join(output)

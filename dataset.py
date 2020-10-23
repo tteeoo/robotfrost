@@ -37,7 +37,7 @@ class GutenbergDataset(Dataset):
         text = ' '
         for id_nr in id_list:
             text += strip_headers(load_etext(id_nr)).strip()
-        for i in '123456890[]()"”\t\n':
+        for i in '123456890[]()"”“\t\n':
             text = text.replace(i, '')
         text = text.replace('--', '')
         return [i for i in text.split(' ') if i != '']
